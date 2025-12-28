@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google評価・口コミ対策（LPモック）</title>
+    <title>Googleマップ口コミ対策LP（モック）</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link id="theme-style" rel="stylesheet" href="pop-style.css">
+
+    <style>
+        /* スタイル切り替えボタンのスタイル（共通） */
+        #style-switcher {
+            position: fixed; top: 20px; right: 20px; z-index: 9999;
+            background: rgba(255,255,255,0.9); padding: 10px; border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: flex; gap: 10px;
+        }
+        .style-btn {
+            padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;
+            font-weight: bold; font-size: 0.9rem; transition: all 0.2s;
+        }
+        .btn-pop { background: #00B0FF; color: #fff; }
+        .btn-modern { background: #0A1A33; color: #00FFFF; }
+        .btn-honest { background: #1a365d; color: #fff; }
+        .style-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+    </style>
 </head>
 <body>
+
+    <div id="style-switcher">
+        <button class="style-btn btn-pop" onclick="switchStyle('pop-style.css')">pop</button>
+        <button class="style-btn btn-modern" onclick="switchStyle('modern-style.css')">modern</button>
+        <button class="style-btn btn-honest" onclick="switchStyle('honest-style.css')">honest</button>
+    </div>
 
     <section id="fv">
         <div class="container text-center fv-content">
@@ -26,8 +50,8 @@
             <p class="micro-copy">最短即日回答 / SSL暗号化通信 / 秘密厳守</p>
         </div>
         <div class="wave-separator">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#FFFFFF"/>
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" class="wave-path"/>
             </svg>
         </div>
     </section>
@@ -49,36 +73,36 @@
                     <p class="bold problem-alert">現状維持はリスク拡大を意味します。</p>
                 </div>
                 <div class="problem-image">
-                    <img src="image_21.png" alt="悩むビジネスマン">
+                    <img src="image_person.png" alt="悩むビジネスマン">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="target" class="section-padding bg-light">
+    <section id="target" class="section-padding bg-alt">
         <div class="container">
             <div class="section-title-wrapper">
                 <span class="section-en-title">TARGET USERS</span>
                 <h2 class="section-title">こんな人に選ばれています</h2>
             </div>
             <div class="grid-3">
-                <div class="clean-card target-card">
+                <div class="common-card target-card">
                     <div class="icon-wrapper">
-                        <div class="sprite-icon-target icon-mail-ng"></div>
+                        <div class="sprite-icon icon-mail-ng"></div>
                     </div>
                     <h3>Google審査に<br>絶望した方</h3>
                     <p>何度申請しても「ポリシー違反なし」の自動返信ばかり。もう打つ手がないと諦めかけている。</p>
                 </div>
-                <div class="clean-card target-card">
+                <div class="common-card target-card">
                     <div class="icon-wrapper">
-                        <div class="sprite-icon-target icon-money-ng"></div>
+                        <div class="sprite-icon icon-money-ng"></div>
                     </div>
                     <h3>弁護士費用に<br>躊躇した方</h3>
                     <p>相談したら着手金だけで数十万円。成功報酬も高額で、コストが見合わず断念した。</p>
                 </div>
-                <div class="clean-card target-card">
+                <div class="common-card target-card">
                     <div class="icon-wrapper">
-                        <div class="sprite-icon-target icon-unknown"></div>
+                        <div class="sprite-icon icon-unknown"></div>
                     </div>
                     <h3>投稿者が特定できず<br>困っている方</h3>
                     <p>捨て垢や匿名での書き込みで、相手が誰かわからない。法的手段も取れず悩んでいる。</p>
@@ -96,7 +120,7 @@
             <p class="solution-intro">諦める必要はありません。法的な手続きを使わず、Googleの高度なアルゴリズムとガイドラインを解析し、専門的なアプローチで解決を目指します。</p>
             
             <div class="comparison-cards grid-3">
-                <div class="comp-card">
+                <div class="common-card comp-card">
                     <h3>自力で報告</h3>
                     <p class="price">無料</p>
                     <ul>
@@ -104,7 +128,7 @@
                         <li>手間<br><strong>× かかる</strong></li>
                     </ul>
                 </div>
-                <div class="comp-card">
+                <div class="common-card comp-card">
                     <h3>弁護士 (法的手段)</h3>
                     <p class="price">高額<span class="price-sub">(着手金等)</span></p>
                     <ul>
@@ -112,7 +136,7 @@
                         <li>時間<br><strong>× 長期化 (半年以上も)</strong></li>
                     </ul>
                 </div>
-                <div class="comp-card our-service">
+                <div class="common-card comp-card our-service">
                     <div class="recommend-badge">推奨</div>
                     <h3>当社 (専門対策)</h3>
                     <p class="price highlight">完全成果報酬<span class="price-sub">(初期費用0円)</span></p>
@@ -123,44 +147,44 @@
                 </div>
             </div>
 
-            <div class="logic-box">
+            <div class="logic-box common-card">
                 <h3><span class="icon">💡</span>なぜ法的手続きなしで可能なのか？</h3>
                 <p>Googleの審査システムには、一般公開されていない複雑な判定基準が存在します。私たちは膨大な事例データを解析し、その傾向を特定。法的な「開示請求」ではなく、**ガイドラインに正当に準拠した専門的な報告ロジック**を構築し、再審査を促します。違法な手法は一切使用しません。だからこそ、安全かつ迅速なリセットが可能なのです。</p>
             </div>
         </div>
     </section>
 
-    <section id="benefit" class="section-padding bg-light">
+    <section id="benefit" class="section-padding bg-alt">
         <div class="container">
              <div class="section-title-wrapper">
                 <span class="section-en-title">ADVANTAGES</span>
                 <h2 class="section-title">私たちが選ばれる4つの理由</h2>
             </div>
             <div class="grid-4">
-                <div class="clean-card benefit-card">
+                <div class="common-card benefit-card">
                     <div class="icon-wrapper">
-                        <div class="sprite-icon-benefit icon-1"></div>
+                        <div class="sprite-icon icon-benefit-1"></div>
                     </div>
                     <h3>完全成果報酬<br>ノーリスク</h3>
                     <p>万が一、リセットできなかった場合、費用は一切いただきません。着手金も無料です。</p>
                 </div>
-                <div class="clean-card benefit-card">
+                <div class="common-card benefit-card">
                     <div class="icon-wrapper">
-                         <div class="sprite-icon-benefit icon-4"></div>
+                         <div class="sprite-icon icon-benefit-4"></div>
                     </div>
                     <h3>否決案件<br>専門ノウハウ</h3>
                     <p>他社で断られた高難易度案件こそ、私たちの解析力が活きます。豊富なデータベースがあります。</p>
                 </div>
-                <div class="clean-card benefit-card">
+                <div class="common-card benefit-card">
                     <div class="icon-wrapper">
-                         <div class="sprite-icon-benefit icon-3"></div>
+                         <div class="sprite-icon icon-benefit-3"></div>
                     </div>
                     <h3>弁護士不要の<br>スピード対応</h3>
                     <p>煩雑な法的書類は不要。ご依頼から最短即日で解析と対策を開始します。</p>
                 </div>
-                <div class="clean-card benefit-card">
+                <div class="common-card benefit-card">
                     <div class="icon-wrapper">
-                         <div class="sprite-icon-benefit icon-2"></div>
+                         <div class="sprite-icon icon-benefit-2"></div>
                     </div>
                     <h3>完全秘密厳守<br>安心の正攻法</h3>
                     <p>投稿者や周囲に知られることなく、プラットフォームの規約に準拠した手法で解決します。</p>
@@ -176,17 +200,17 @@
                 <h2 class="section-title">導入クライアントの声と実績</h2>
             </div>
             <div class="case-layout">
-                <div class="case-graph text-center">
+                <div class="case-graph text-center common-card">
                     <h3 class="graph-title">評価平均 <span class="highlight">★2.5 → ★4.2</span> に回復</h3>
-                    <img src="image_16.png" alt="評価回復グラフ">
+                    <img src="image_graph.png" alt="評価回復グラフ">
                     <p class="graph-note">*当社クライアント平均データに基づく</p>
                 </div>
                 <div class="case-testimonials">
-                    <div class="clean-card case-box">
+                    <div class="common-card case-box">
                         <h3>CASE A: 飲食店経営者様</h3>
                         <p>「Googleの自動返信に絶望していましたが、依頼から1ヶ月で事実無根の低評価が削除され、検索流入が回復しました。プロの解析力に感謝です。」</p>
                     </div>
-                    <div class="clean-card case-box">
+                    <div class="common-card case-box">
                         <h3>CASE B: クリニック院長様</h3>
                         <p>「弁護士費用が高すぎて諦めていたところ、成果報酬制の技術的なアプローチを知り依頼。スタッフの士気も上がり、本当に助かりました。」</p>
                     </div>
@@ -198,16 +222,16 @@
         </div>
     </section>
 
-    <section id="faq" class="section-padding bg-light">
+    <section id="faq" class="section-padding bg-alt">
         <div class="container">
             <div class="section-title-wrapper">
                 <span class="section-en-title">FAQ</span>
                 <h2 class="section-title">よくある質問事項</h2>
             </div>
             <div class="faq-list">
-                <div class="clean-card faq-item">
+                <div class="common-card faq-item">
                     <div class="faq-icon-wrapper">
-                        <div class="sprite-icon-target icon-q-mark"></div>
+                        <div class="sprite-icon icon-q-mark"></div>
                     </div>
                     <div class="faq-content">
                         <h3>本当に消せますか？成功率は？</h3>
@@ -216,9 +240,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="clean-card faq-item">
+                <div class="common-card faq-item">
                     <div class="faq-icon-wrapper">
-                        <div class="sprite-icon-target icon-q-mark"></div>
+                        <div class="sprite-icon icon-q-mark"></div>
                     </div>
                     <div class="faq-content">
                         <h3>なぜ弁護士より安いのですか？</h3>
@@ -227,9 +251,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="clean-card faq-item">
+                <div class="common-card faq-item">
                     <div class="faq-icon-wrapper">
-                        <div class="sprite-icon-target icon-q-mark"></div>
+                        <div class="sprite-icon icon-q-mark"></div>
                     </div>
                     <div class="faq-content">
                         <h3>違法な手法ではないですか？</h3>
@@ -238,9 +262,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="clean-card faq-item">
+                <div class="common-card faq-item">
                     <div class="faq-icon-wrapper">
-                        <div class="sprite-icon-target icon-q-mark"></div>
+                        <div class="sprite-icon icon-q-mark"></div>
                     </div>
                     <div class="faq-content">
                         <h3>地方ですが対応できますか？</h3>
@@ -261,7 +285,7 @@
             <a href="#contact-form" class="cta-button main-cta">今すぐ無料で解析診断する</a>
             <p class="micro-copy mt-2">まずは可能性を知るだけでも構いません。最短即日回答。</p>
 
-            <div id="contact-form" class="clean-card form-card">
+            <div id="contact-form" class="common-card form-card">
                 <h3 class="text-center form-title">無料解析診断フォーム</h3>
                 <p class="text-center form-intro">下記フォームより対象URLをお知らせください。<br>専門スタッフがリセットの可能性を診断し、結果をご連絡します。</p>
                 
@@ -293,6 +317,12 @@
             </a>
         </div>
     </div>
+
+    <script>
+        function switchStyle(sheet) {
+            document.getElementById('theme-style').href = sheet;
+        }
+    </script>
 
 </body>
 </html>
