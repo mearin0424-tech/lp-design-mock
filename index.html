@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Googleマップ口コミ対策LP（モック）</title>
+    <title>Googleマップ口コミ対策LP</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <link id="theme-style" rel="stylesheet" href="pop-style.css">
 
     <style>
-        /* スタイル切り替えボタンのスタイル（共通） */
+        /* スタイル切り替えボタン */
         #style-switcher {
             position: fixed; top: 20px; right: 20px; z-index: 9999;
             background: rgba(255,255,255,0.9); padding: 10px; border-radius: 8px;
@@ -30,9 +30,9 @@
 <body>
 
     <div id="style-switcher">
-        <button class="style-btn btn-pop" onclick="switchStyle('pop-style.css')">pop</button>
-        <button class="style-btn btn-modern" onclick="switchStyle('modern-style.css')">modern</button>
-        <button class="style-btn btn-honest" onclick="switchStyle('honest-style.css')">honest</button>
+        <button class="style-btn btn-pop" onclick="switchStyle('pop-style.css')">ポップ (青)</button>
+        <button class="style-btn btn-modern" onclick="switchStyle('modern-style.css')">モダン</button>
+        <button class="style-btn btn-honest" onclick="switchStyle('honest-style.css')">誠実</button>
     </div>
 
     <section id="fv">
@@ -49,11 +49,7 @@
             <a href="#contact-form" class="cta-button main-cta">まず無料で解析診断する</a>
             <p class="micro-copy">最短即日回答 / SSL暗号化通信 / 秘密厳守</p>
         </div>
-        <div class="wave-separator">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" class="wave-path"/>
-            </svg>
-        </div>
+        <div class="wave-separator"></div>
     </section>
 
     <section id="problem" class="section-padding">
@@ -73,7 +69,7 @@
                     <p class="bold problem-alert">現状維持はリスク拡大を意味します。</p>
                 </div>
                 <div class="problem-image">
-                    <img src="image_person.png" alt="悩むビジネスマン">
+                    <div class="problem-image-bg" role="img" aria-label="悩むビジネスマン"></div>
                 </div>
             </div>
         </div>
@@ -170,21 +166,21 @@
                 </div>
                 <div class="common-card benefit-card">
                     <div class="icon-wrapper">
-                         <div class="sprite-icon icon-benefit-4"></div>
+                        <div class="sprite-icon icon-benefit-4"></div>
                     </div>
                     <h3>否決案件<br>専門ノウハウ</h3>
                     <p>他社で断られた高難易度案件こそ、私たちの解析力が活きます。豊富なデータベースがあります。</p>
                 </div>
                 <div class="common-card benefit-card">
                     <div class="icon-wrapper">
-                         <div class="sprite-icon icon-benefit-3"></div>
+                        <div class="sprite-icon icon-benefit-3"></div>
                     </div>
                     <h3>弁護士不要の<br>スピード対応</h3>
                     <p>煩雑な法的書類は不要。ご依頼から最短即日で解析と対策を開始します。</p>
                 </div>
                 <div class="common-card benefit-card">
                     <div class="icon-wrapper">
-                         <div class="sprite-icon icon-benefit-2"></div>
+                        <div class="sprite-icon icon-benefit-2"></div>
                     </div>
                     <h3>完全秘密厳守<br>安心の正攻法</h3>
                     <p>投稿者や周囲に知られることなく、プラットフォームの規約に準拠した手法で解決します。</p>
@@ -202,7 +198,7 @@
             <div class="case-layout">
                 <div class="case-graph text-center common-card">
                     <h3 class="graph-title">評価平均 <span class="highlight">★2.5 → ★4.2</span> に回復</h3>
-                    <img src="image_graph.png" alt="評価回復グラフ">
+                    <div class="case-graph-bg" role="img" aria-label="評価回復グラフ"></div>
                     <p class="graph-note">*当社クライアント平均データに基づく</p>
                 </div>
                 <div class="case-testimonials">
