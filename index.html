@@ -3,51 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Googleマップ口コミ対策LP（修正版）</title>
+    <title>Googleマップ口コミ対策無料診断</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
     
-    <link id="theme-style" rel="stylesheet" href="pop-style.css">
-
-    <style>
-        /* スタイル切り替えボタン */
-        #style-switcher {
-            position: fixed; top: 20px; right: 20px; z-index: 9999;
-            background: rgba(255,255,255,0.9); padding: 10px; border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: flex; gap: 10px;
-        }
-        .style-btn {
-            padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;
-            font-weight: bold; font-size: 0.9rem; transition: all 0.2s;
-        }
-        .btn-pop { background: #00B0FF; color: #fff; }
-        .btn-modern { background: #0A1A33; color: #00FFFF; }
-        .btn-honest { background: #1a365d; color: #fff; }
-        .style-btn:hover { opacity: 0.8; transform: translateY(-2px); }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="style-switcher">
-        <button class="style-btn btn-pop" onclick="switchStyle('pop-style.css')">ポップ (青)</button>
-        <button class="style-btn btn-modern" onclick="switchStyle('modern-style.css')">モダン</button>
-        <button class="style-btn btn-honest" onclick="switchStyle('honest-style.css')">誠実</button>
-    </div>
 
     <section id="fv">
         <div class="container text-center fv-content">
             <div class="fv-badge">Google否決案件の解決実績多数</div>
-            <h1 class="fv-title">Googleに削除申請を<br><span class="highlight">否決</span>された方へ。<br>まだ諦めないでください！</h1>
-            <p class="fv-subtitle">法的手続き不要。当社だけの専門技術で、他より安く・安全な正攻法で・スピード解決！</p>
+            <h1 class="fv-title">Googleの悪い口コミ、<br>消せます。<br><span class="highlight">否決</span>された方、諦めないで。</h1>
             
-            <div class="fv-offer">
-                <span class="offer-sub">初期費用0円・完全成果報酬制</span><br>
-                <span class="offer-note">(成功しなければ費用は一切かかりません)</span>
+            <div class="fv-tags">
+                <span class="tag">#着手金ゼロ・完全成果報酬</span>
+                <span class="tag">#最短即日着手</span>
+                <span class="tag">#ガイドライン準拠の正攻法</span>
+                <span class="tag">#弁護士不要</span>
             </div>
-            <br>
-            <a href="#contact-form" class="cta-button main-cta">まず無料で解析診断する</a>
-            <p class="micro-copy">最短即日回答 / SSL暗号化通信 / 秘密厳守</p>
+            
+            <div class="fv-offer-box">
+                <p class="security-copy">
+                    <span class="secure-icon">🔒</span>SSL暗号化通信 / 高度解析アルゴリズム採用 / 秘密厳守
+                </p>
+                <div class="fv-url-input-group">
+                    <input type="url" class="fv-url-input" placeholder="ここに対象のGoogleマップURLを貼り付け">
+                    <button onclick="location.href='#contact-form-section'" class="cta-button main-cta fv-cta-btn">削除・対策可能か無料で確認</button>
+                </div>
+                <p class="micro-copy">※まずは可能性の診断のみを行います。費用は一切かかりません。</p>
+            </div>
         </div>
         <div class="wave-separator"></div>
     </section>
@@ -222,7 +208,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <a href="#contact-form" class="cta-button secondary">他の実績を見る（無料診断へ）</a>
+                        <a href="#contact-form-section" class="cta-button secondary">他の実績を見る（無料診断へ）</a>
                     </div>
                 </div>
             </div>
@@ -289,47 +275,68 @@
             <h2>あなたの店舗の信頼を、<br>これ以上毀損させないために。</h2>
             <p class="cta-final-text">悪い口コミは放置するほど、評価が固定化します。<br>一日も早い対策が、被害を最小限に食い止める鍵です。</p>
             
-            <a href="#contact-form" class="cta-button main-cta">今すぐ無料で解析診断する</a>
-            <p class="micro-copy mt-2">まずは可能性を知るだけでも構いません。最短即日回答。</p>
-
-            <div id="contact-form" class="common-card form-card">
+            <div id="contact-form-section" class="common-card form-card">
                 <h3 class="text-center form-title">無料解析診断フォーム</h3>
-                <p class="text-center form-intro">下記フォームより対象URLをお知らせください。<br>専門スタッフがリセットの可能性を診断し、結果をご連絡します。</p>
                 
-                <div class="form-grid">
-                    <input type="text" placeholder="会社名 / 店舗名" class="form-input">
-                    <input type="text" placeholder="ご担当者名" class="form-input">
-                    <input type="email" placeholder="メールアドレス (必須)" class="form-input">
-                    <input type="url" placeholder="対象のGoogleマップURL (必須)" class="form-input highlight-input">
-                    <textarea placeholder="ご相談詳細（任意）" rows="4" class="form-input"></textarea>
+                <div class="form-step step-1">
+                    <p class="text-center form-intro bold">STEP 1: 対象のURLを入力してください</p>
+                    <div class="url-input-group-final">
+                        <input type="url" class="form-input highlight-input" placeholder="Googleマップ または 具体的な口コミのURL (必須)">
+                        <button class="cta-button main-cta form-submit-btn">削除・対策可能か無料で確認</button>
+                    </div>
+                    <p class="micro-copy text-center mt-1">※対象URLが正確でないと診断できません。</p>
                 </div>
-                
-                <div class="text-center mt-3">
-                    <button class="cta-button main-cta form-submit">解析診断を依頼する (無料)</button>
-                    <p class="micro-copy mt-2">※SSL暗号化通信。秘密厳守。強引な営業は一切いたしません。</p>
+
+                <div class="form-step step-2 mt-3 pt-3" style="border-top: 2px dashed #eee;">
+                    <p class="text-center form-intro bold">STEP 2: 診断結果の送付先を入力してください</p>
+                    <p class="text-center form-intro-sm mb-2">専門スタッフが解析し、1営業日以内に結果をご連絡します。</p>
+                    
+                    <div class="form-grid contact-grid">
+                        <input type="text" placeholder="会社名 / 店舗名 (必須)" class="form-input">
+                        <input type="text" placeholder="ご担当者名 (必須)" class="form-input">
+                        <input type="email" placeholder="メールアドレス (必須)" class="form-input">
+                        <input type="tel" placeholder="電話番号 (必須)" class="form-input">
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <button class="cta-button main-cta form-submit-final">上記内容で診断を依頼する</button>
+                        <p class="security-note mt-2">
+                            <span class="icon">🔒</span>SSL暗号化通信により情報は保護されます。<br>
+                            強引な営業活動は一切行いません。
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="fixed-bottom-bar">
-        <div class="fixed-bottom-container">
-            <a href="#" class="floating-button btn-line">
-                <svg class="float-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.38 12.64c.03-.3.05-.6.05-.91 0-4.66-3.92-8.43-8.75-8.43s-8.75 3.77-8.75 8.43c0 4.18 3.14 7.67 7.55 8.32.41.08.76.24 1.04.48.19.16.29.41.37.67l.5 1.53c.13.42.27.85.52 1.2.18.26.45.44.77.5.27.05.55.02.81-.1.29-.14.55-.36.77-.63 2.1-2.56 3.47-5.43 3.85-8.56l.01-.03c.16-.48.29-.98.38-1.49zM11.69 15.67h-5.2v-1.68h3.53v-1.63H6.49v-1.68h3.53v-1.63H6.49V7.37h5.2v8.3zm5.2 0h-1.67V7.37h1.67v8.3zm-3.44-8.3h1.67v8.3h-1.67V7.37zm6.89 6.67h-3.53V7.37h3.53v1.68h-1.86v1.63h1.86v1.68h-1.86v1.63h1.86v1.68z"/></svg>
-                専門家へLINEで相談
+    <div id="completion-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content common-card text-center">
+            <h3 class="modal-title">診断依頼が完了しました</h3>
+            <p class="modal-text">担当者より折り返しメールにて結果をご連絡いたします。<br>お急ぎの場合は、LINEでのご連絡がスムーズです。</p>
+            <a href="#" class="cta-button line-cta">
+                <svg class="line-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.38 12.64c.03-.3.05-.6.05-.91 0-4.66-3.92-8.43-8.75-8.43s-8.75 3.77-8.75 8.43c0 4.18 3.14 7.67 7.55 8.32.41.08.76.24 1.04.48.19.16.29.41.37.67l.5 1.53c.13.42.27.85.52 1.2.18.26.45.44.77.5.27.05.55.02.81-.1.29-.14.55-.36.77-.63 2.1-2.56 3.47-5.43 3.85-8.56l.01-.03c.16-.48.29-.98.38-1.49zM11.69 15.67h-5.2v-1.68h3.53v-1.63H6.49v-1.68h3.53v-1.63H6.49V7.37h5.2v8.3zm5.2 0h-1.67V7.37h1.67v8.3zm-3.44-8.3h1.67v8.3h-1.67V7.37zm6.89 6.67h-3.53V7.37h3.53v1.68h-1.86v1.63h1.86v1.68h-1.86v1.63h1.86v1.68z"/></svg>
+                LINEなら24時間即時対応
             </a>
-            <a href="#contact-form" class="floating-button btn-diagnosis">
-                <svg class="float-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
-                無料で解析診断
-            </a>
+            <p class="micro-copy mt-1">※友だち追加後、自動メッセージが届きます。</p>
+            <button class="modal-close">閉じる</button>
         </div>
     </div>
 
-    <script>
-        function switchStyle(sheet) {
-            document.getElementById('theme-style').href = sheet;
-        }
-    </script>
+
+    <div class="fixed-bottom-bar">
+        <div class="fixed-bottom-container">
+            <a href="#" class="floating-button btn-line">
+                <svg class="float-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.38 12.64c.03-.3.05-.6.05-.91 0-4.66-3.92-8.43-8.75-8.43s-8.75 3.77-8.75 8.43c0 4.18 3.14 7.67 7.55 8.32.41.08.76.24 1.04.48.19.16.29.41.37.67l.5 1.53c.13.42.27.85.52 1.2.18.26.45.44.77.5.27.05.55.02.81-.1.29-.14.55-.36.77-.63 2.1-2.56 3.47-5.43 3.85-8.56l.01-.03c.16-.48.29-.98.38-1.49zM11.69 15.67h-5.2v-1.68h3.53v-1.63H6.49v-1.68h3.53v-1.63H6.49V7.37h5.2v8.3zm5.2 0h-1.67V7.37h1.67v8.3zm-3.44-8.3h1.67v8.3h-1.67V7.37zm6.89 6.67h-3.53V7.37h3.53v1.68h-1.86v1.63h1.86v1.68z"/></svg>
+                LINEで24時間即時対応
+            </a>
+            <a href="#contact-form-section" class="floating-button btn-diagnosis">
+                <svg class="float-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                無料で解析診断する
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
