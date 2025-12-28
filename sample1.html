@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Googleマップ口コミ対策LP（完全版）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- カラー＆フォント定義 (サイバー＆テクニカル) --- */
+        :root {
+            --primary-color: #0A1A33; /* 深いダークネイビー背景 */
+            --accent-color: #00FFFF; /* デジタルシアン（発光色） */
+            --secondary-color: #007BFF; /* 補助のブルー */
+            --text-color: #E0E0E0; /* 明るいグレーテキスト */
+            --text-light: #A0A0A0; /* 暗いグレーテキスト */
+            --bg-dark: #050F1F; /* より暗い背景 */
+            --bg-panel: rgba(10, 26, 51, 0.7); /* 半透明パネル背景 */
+            
+            --font-sans: 'Noto Sans JP', sans-serif; /* 標準ゴシック体 */
+            --font-mono: 'Roboto Mono', monospace; /* テクニカルな等幅フォント */
+            --border-radius: 4px; /* シャープな角 */
+        }
+
+        /* --- 基本スタイル --- */
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.8;
+            background-color: var(--bg-dark);
+            padding-bottom: 80px;
+            /* デジタルグリッド背景 */
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        h1, h2, h3, h4 {
+            font-family: var(--font-sans);
+            color: #fff;
+            margin: 0 0 1rem 0;
+            font-weight: 900;
+            line-height: 1.3;
+            letter-spacing: 0.05em;
+            text-transform: uppercase; /* 大文字で力強く */
+        }
+        p { margin: 0 0 1.5rem 0; font-weight: 400; }
+        .container { width: 90%; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+        .text-center { text-align: center; }
+        .text-accent { color: var(--accent-color); }
+        .bold { font-weight: 700; }
+        .section-padding { padding: 120px 0; position: relative; z-index: 1; overflow: hidden; }
+
+        /* --- 見出し装飾（デジタルバーとサブタイトル） --- */
+        .section-title-wrapper { text-align: center; margin-bottom: 5rem; position: relative; }
+        .section-en-title {
+            font-family: var(--font-mono); color: var(--accent-color); font-size: 1rem; letter-spacing: 0.2em;
+            display: block; margin-bottom: 0.5em; opacity: 0.8;
+        }
+        .section-title {
+            text-align: center; font-size: 2.5rem; position: relative; display: inline-block;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* 発光 */
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 4px; background: var(--accent-color);
+            /* デジタルなパターンバー */
+            background-image: linear-gradient(90deg, var(--accent-color) 0%, var(--accent-color) 20%, transparent 20%, transparent 30%, var(--accent-color) 30%, var(--accent-color) 50%, transparent 50%, transparent 60%, var(--accent-color) 60%, var(--accent-color) 100%);
+            background-size: 20px 4px;
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        /* --- コンポーネント --- */
+        /* ネオン発光ボタン */
+        .cta-button {
+            display: inline-block;
+            background: transparent;
+            color: var(--accent-color);
+            font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; padding: 1em 3em;
+            border-radius: var(--border-radius); text-decoration: none;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), inset 0 0 15px rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease; cursor: pointer;
+            position: relative; overflow: hidden;
+        }
+        .cta-button::before { /* スキャンラインエフェクト */
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(transparent, rgba(0, 255, 255, 0.2), transparent);
+            transform: rotate(45deg); animation: scan 3s infinite linear;
+        }
+        @keyframes scan { 0% { top: -200%; } 100% { top: 200%; } }
+
+        .cta-button:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), inset 0 0 20px rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .cta-button.secondary {
+            border-color: var(--text-light); color: var(--text-light); box-shadow: none;
+        }
+        .cta-button.secondary:hover {
+            border-color: var(--accent-color); color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        /* --- 共通カードスタイル（グラスモーフィズム＆発光ボーダー） --- */
+        .tech-card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px; border-radius: var(--border-radius);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .tech-card::before { /* 上辺の発光バー */
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            transform: translateX(-100%); transition: transform 0.5s ease;
+        }
+        .tech-card:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2); border-color: rgba(0, 255, 255, 0.5);
+        }
+        .tech-card:hover::before { transform: translateX(100%); }
+
+        /* --- 共通アイコンスタイル（スプライト画像） --- */
+        .sprite-icon {
+            background-image: url('image_19.png');
+            background-size: 600% 200%; /* 横6列、縦2行と仮定して調整 */
+            display: inline-block;
+        }
+
+        /* --- FV (ファーストビュー) --- */
+        #fv {
+            /* 生成されたサイバーな背景画像を設定 */
+            background-image: url('image_17.png');
+            background-size: cover; background-position: center;
+            color: #fff; padding: 180px 0 160px; position: relative;
+        }
+        #fv::before { /* 全体を青く染めるオーバーレイ */
+             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+             background: rgba(5, 15, 31, 0.6); mix-blend-mode: multiply;
+        }
+        #fv::after { /* デジタルノイズ効果（任意） */
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+        }
+        .fv-content { position: relative; z-index: 2; }
+        .fv-badge {
+            font-family: var(--font-mono); color: var(--accent-color); border: 1px solid var(--accent-color);
+            padding: 0.5em 1.5em; border-radius: 0; font-size: 1rem; font-weight: 700;
+            display: inline-block; margin-bottom: 2em; background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        h1.fv-title {
+            font-size: 4rem; line-height: 1.2; margin-bottom: 0.5em;
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8); /* 青白い発光 */
+        }
+        .highlight { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color); }
+
+        p.fv-subtitle {
+            font-size: 1.5rem; margin-bottom: 3em; font-weight: 700; opacity: 0.9; font-family: var(--font-mono);
+        }
+        .fv-offer {
+            font-size: 1.6rem; font-weight: 900;
+            padding: 1.5em 2.5em; border-radius: var(--border-radius); margin-bottom: 3em; display: inline-block;
+            border: 2px solid var(--accent-color); background: rgba(0, 20, 40, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
+            position: relative;
+        }
+        /* オファーボックスの四隅に装飾 */
+        .fv-offer::before, .fv-offer::after { content: ''; position: absolute; width: 20px; height: 20px; border: 2px solid var(--accent-color); }
+        .fv-offer::before { top: -2px; left: -2px; border-bottom: none; border-right: none; }
+        .fv-offer::after { bottom: -2px; right: -2px; border-top: none; border-left: none; }
+        .fv-offer strong { color: var(--accent-color); font-size: 2rem; font-family: var(--font-mono); }
+
+        /* --- 問題提起セクション --- */
+        #problem { background-color: var(--bg-dark); }
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .problem-image img {
+            width: 100%; border-radius: var(--border-radius);
+            border: 2px solid var(--accent-color); box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+            filter: contrast(1.2) brightness(0.9); /* 少し暗くコントラストを上げる */
+        }
+        /* 画像にスキャンラインを重ねる */
+        .problem-image::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.1) 3px);
+            pointer-events: none;
+        }
+        .problem-list li {
+            position: relative; padding-left: 2.5em; margin-bottom: 1.5em; font-size: 1.1rem; font-weight: 700;
+            font-family: var(--font-mono);
+        }
+        /* チェックマークをデジタルなカーソルに */
+        .problem-list li::before {
+            content: '>_'; position: absolute; left: 0; top: 0; color: var(--accent-color); font-weight: 900;
+        }
+
+        /* --- こんな人に選ばれていますセクション --- */
+        #target { background-color: #071224; }
+        .target-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .target-card { text-align: center; padding-bottom: 30px; }
+        .target-icon-wrapper {
+            width: 100px; height: 100px; margin: 0 auto 1.5em; display: flex; align-items: center; justify-content: center;
+            background: rgba(0, 255, 255, 0.05); border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), inset 0 0 10px rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        .target-icon { width: 80px; height: 80px; filter: drop-shadow(0 0 5px var(--accent-color)); }
+        /* スプライト画像の切り出し */
+        .icon-mail-ng { background-position: 20% 0%; } /* 上段左から2番目 */
+        .icon-money-ng { background-position: 40% 0%; } /* 上段左から3番目 */
+        .icon-unknown { background-position: 20% 100%; } /* 下段左から2番目 */
+        
+        .target-card h3 { font-size: 1.3rem; margin-bottom: 1em; color: var(--accent-color); font-family: var(--font-mono); }
+        .target-card p { font-size: 1rem; color: var(--text-light); margin-bottom: 0; }
+
+
+        /* --- 解決策比較セクション --- */
+        #solution { background-color: var(--bg-dark); }
+        .solution-intro { text-align: center; max-width: 800px; margin: 0 auto 4rem; font-size: 1.2rem; }
+        
+        .comparison-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: stretch;
+        }
+        .comp-card {
+            /* 共通カードスタイルを適用 */
+            background: var(--bg-panel); border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); padding: 40px 30px; border-radius: var(--border-radius);
+            text-align: center; flex: 0 0 auto; position: relative; overflow: hidden;
+            border-top: 4px solid #333; transition: all 0.3s ease;
+        }
+        .comp-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+
+        .comp-card h3 { font-size: 1.3rem; margin-bottom: 1em; font-family: var(--font-mono); }
+        .comp-card ul { list-style: none; padding: 0; text-align: left; display: inline-block; margin-top: 1.5em; }
+        .comp-card li { margin-bottom: 1em; color: var(--text-light); font-family: var(--font-mono); font-size: 0.9rem;}
+        .comp-card li strong { display: block; color: var(--text-color); font-size: 1.1rem; }
+        
+        /* 推奨カード（強く発光） */
+        .comp-card.our-service {
+            border-top-color: var(--accent-color); background: rgba(0, 255, 255, 0.05);
+            transform: scale(1.05); z-index: 2;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--accent-color);
+        }
+        .comp-card.our-service h3 { color: var(--accent-color); }
+        .comp-card.our-service li strong { color: var(--accent-color); }
+        .recommend-badge {
+            background: var(--accent-color); color: var(--primary-color); padding: 5px 20px;
+            border-radius: 0; font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem;
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            box-shadow: 0 0 15px var(--accent-color); z-index: 3; letter-spacing: 0.1em;
+        }
+        .logic-box {
+            margin-top: 4rem; padding: 50px; border-radius: var(--border-radius);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1); border: 1px solid var(--accent-color);
+            background: rgba(0, 20, 40, 0.8); position: relative; overflow: hidden;
+        }
+        /* 背景に回路図パターン */
+        .logic-box::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 H90 V90 H10 L10 10' fill='none' stroke='%2300FFFF' stroke-width='1'/%3E%3Cpath d='M30 30 H70 V70 H30 L30 30' fill='none' stroke='%2300FFFF' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='5' fill='%2300FFFF'/%3E%3C/svg%3E");
+        }
+        .logic-box > * { position: relative; z-index: 1; }
+
+        /* --- 選ばれる理由セクション --- */
+        #benefit { background-color: #071224; }
+        .benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .benefit-card {
+            /* 共通カードスタイル適用 */
+            background: var(--bg-panel); border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px); padding: 40px 25px; border-radius: var(--border-radius);
+            text-align: center; transition: all 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-10px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            border-color: var(--accent-color);
+        }
+        .benefit-icon-wrapper {
+            width: 90px; height: 90px; margin: 0 auto 1.5em; display: flex; align-items: center; justify-content: center;
+            /* アイコンの背後に光る円 */
+            background: rgba(0, 255, 255, 0.1); border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        /* 生成されたワイヤーフレームアイコンを使用 */
+        .benefit-icon {
+            width: 70px; height: 70px; background-image: url('image_18.png');
+            background-size: 400% 100%; filter: drop-shadow(0 0 5px var(--accent-color));
+        }
+        .icon-1 { background-position: 0% 0%; } .icon-2 { background-position: 33.33% 0%; }
+        .icon-3 { background-position: 66.66% 0%; } .icon-4 { background-position: 100% 0%; }
+
+        /* --- 事例セクション --- */
+        #case { background-color: var(--bg-dark); }
+        .case-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .case-graph {
+            /* 共通カードスタイル適用 */
+            background: var(--bg-panel); border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px); padding: 30px; border-radius: var(--border-radius);
+        }
+        .case-graph img {
+            width: 100%; border-radius: 4px; filter: hue-rotate(180deg) invert(1); /* グラフの色を反転させて青系に */
+        }
+        .case-box {
+            /* 共通カードスタイル適用 */
+            background: var(--bg-panel); border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px); padding: 35px; border-radius: var(--border-radius);
+            margin-bottom: 25px; border-left: 4px solid var(--accent-color);
+        }
+        .case-box h3 { font-size: 1.2rem; margin-bottom: 0.5em; color: var(--accent-color); font-family: var(--font-mono);}
+        .case-box p { font-size: 1rem; font-weight: 400; color: var(--text-color); }
+
+        /* --- よくある質問事項セクション --- */
+        #faq { background-color: #071224; }
+        .faq-list { display: grid; gap: 20px; max-width: 800px; margin: 0 auto; }
+        .faq-item {
+            display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start;
+            padding: 30px; text-align: left;
+        }
+        .faq-icon-wrapper {
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+            background: rgba(0, 255, 255, 0.1); border-radius: 50%;
+            border: 1px solid var(--accent-color); flex-shrink: 0;
+        }
+        .faq-icon {
+            width: 30px; height: 30px; filter: drop-shadow(0 0 3px var(--accent-color));
+        }
+        .icon-q-mark { background-position: 100% 100%; } /* 下段右端のQマーク */
+
+        .faq-content h3 {
+            font-size: 1.2rem; margin-bottom: 0.8em; color: var(--accent-color); font-family: var(--font-mono);
+            display: flex; align-items: center;
+        }
+        .faq-content h3::before { content: 'Q. '; margin-right: 0.5em; opacity: 0.7; }
+        .faq-answer {
+            font-size: 1rem; color: var(--text-color); padding-left: 1em; border-left: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        .faq-answer p { margin-bottom: 0; }
+
+
+        /* --- 最後のCTAセクション --- */
+        #cta-final {
+            background-color: #030A14; color: #fff; text-align: center;
+            /* デジタルグリッドと光の粒子 */
+            background-image: 
+                radial-gradient(circle, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px, 50px 50px, 50px 50px;
+        }
+        #cta-final h2 { font-size: 3.5rem; color: #fff; text-shadow: 0 0 15px var(--accent-color); }
+
+        /* --- 下部フローティング帯ボタン (デザイン調整) --- */
+        .fixed-bottom-bar {
+            position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999;
+            background: rgba(5, 15, 31, 0.9); /* ダークな半透明 */
+            padding: 15px 0; box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.1);
+            border-top: 1px solid var(--accent-color); backdrop-filter: blur(10px);
+        }
+        .fixed-bottom-container {
+            display: flex; justify-content: center; gap: 15px; max-width: 900px; margin: 0 auto; padding: 0 15px;
+        }
+        .floating-button {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            padding: 15px 20px; border-radius: var(--border-radius); text-decoration: none;
+            color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 1rem;
+            transition: all 0.3s ease; text-align: center; max-width: 400px;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2), inset 0 0 10px rgba(0, 255, 255, 0.1);
+        }
+        .floating-button:hover {
+            transform: translateY(-2px); box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); background: rgba(0, 255, 255, 0.1);
+        }
+        .btn-line { background-color: transparent; color: #06C755; border-color: #06C755; box-shadow: 0 0 10px rgba(6, 199, 85, 0.2); }
+        .btn-line:hover { background-color: rgba(6, 199, 85, 0.1); box-shadow: 0 0 20px rgba(6, 199, 85, 0.4); }
+        .btn-diagnosis { background-color: transparent; }
+        .float-icon { width: 24px; height: 24px; margin-right: 10px; fill: currentColor; filter: drop-shadow(0 0 5px currentColor); }
+
+
+        /* --- レスポンシブ対応 --- */
+        @media (max-width: 768px) {
+            .section-padding { padding: 80px 0; }
+            h1.fv-title { font-size: 2.8rem; } .section-title { font-size: 2rem; }
+            .fv-offer { font-size: 1.2rem; padding: 1em 1.5em; } .fv-offer strong { font-size: 1.5rem; }
+            .problem-grid, .target-grid, .case-layout { grid-template-columns: 1fr; gap: 40px; }
+            .problem-image { order: -1; }
+            
+            /* スマホ横スクロール比較カード */
+            .comparison-cards {
+                display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
+                gap: 15px; padding: 30px 15px; margin: 0 -15px;
+                scroll-snap-type: x mandatory; scrollbar-width: none;
+            }
+            .comparison-cards::-webkit-scrollbar { display: none; }
+            .comp-card {
+                flex: 0 0 auto; min-width: 280px; max-width: 85%;
+                scroll-snap-align: center; padding: 30px 20px;
+            }
+            .comp-card.our-service { transform: scale(1); }
+            .recommend-badge { top: -15px; padding: 5px 15px; font-size: 0.9rem; }
+            
+            .benefit-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+            #cta-final h2 { font-size: 2.5rem; }
+
+            .floating-button { font-size: 0.9rem; padding: 10px 15px; }
+            .float-icon { width: 20px; height: 20px; margin-right: 8px; }
+            
+            /* FAQのスマホ表示調整 */
+            .faq-item { grid-template-columns: 1fr; gap: 10px; }
+            .faq-icon-wrapper { margin-bottom: 10px; }
+        }
+        @media (max-width: 480px) {
+             .benefit-grid, .target-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="fv">
+        <div class="container text-center fv-content">
+            <div class="fv-badge">GOOGLE MAPS OPTIMIZATION</div>
+            <h1 class="fv-title">Google削除申請で<br>「否決」された方へ。<br>その不当な低評価、<br><span class="highlight">専門技術</span>で解決します。</h1>
+            <p class="fv-subtitle">弁護士不要。データに基づく正攻法。信頼回復のための第三の選択肢。</p>
+            
+            <div class="fv-offer">
+                <span style="font-family: var(--font-mono);">INITIAL COST: 0 / FULL PERFORMANCE-BASED</span><br>
+                初期費用0円・<strong>完全成果報酬制</strong><br>
+                <span style="font-size: 0.8em; font-family: var(--font-mono); opacity:0.8;">(成功しなければ費用は一切かかりません)</span>
+            </div>
+            <br>
+            <a href="#contact-form" class="cta-button">まず無料で解析診断する</a>
+            <p style="color:var(--text-light); margin-top: 1.5em; font-weight: 700; font-family: var(--font-mono);">最短即日回答 / SSL暗号化通信 / 秘密厳守</p>
+        </div>
+    </section>
+
+    <section id="problem" class="section-padding">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-en-title">PROBLEM IDENTIFICATION</span>
+                <h2 class="section-title">理不尽な口コミ一つで、<br>店舗のデジタル資産が毀損されていませんか？</h2>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-text">
+                    <ul class="problem-list">
+                        <li>事実無根の誹謗中傷により、検索経由の来店客数・CVRが激減した。</li>
+                        <li>Googleの自動審査で「ポリシー違反なし」と機械的に判定され、手詰まりだ。</li>
+                        <li>弁護士に相談したが、高額な着手金と長期化するリスクを提示され断念した。</li>
+                        <li>毎日ダッシュボードを見るのが精神的な負担になっている。</li>
+                    </ul>
+                    <p class="bold" style="margin-top: 2em; font-size: 1.3rem; color: var(--accent-color); font-family: var(--font-mono);">ERROR: 現状維持はリスク拡大を意味します。</p>
+                </div>
+                <div class="problem-image">
+                    <img src="image_14.png" alt="悩むビジネスマン">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="target" class="section-padding">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-en-title">TARGET USERS</span>
+                <h2 class="section-title">こんな人に選ばれています</h2>
+            </div>
+            <div class="target-grid">
+                <div class="tech-card target-card">
+                    <div class="target-icon-wrapper">
+                        <div class="sprite-icon target-icon icon-mail-ng"></div>
+                    </div>
+                    <h3>GOOGLE審査に<br>絶望した方</h3>
+                    <p>何度申請しても「ポリシー違反なし」の自動返信ばかり。もう打つ手がないと諦めかけている。</p>
+                </div>
+                <div class="tech-card target-card">
+                    <div class="target-icon-wrapper">
+                        <div class="sprite-icon target-icon icon-money-ng"></div>
+                    </div>
+                    <h3>弁護士費用に<br>躊躇した方</h3>
+                    <p>相談したら着手金だけで数十万円。成功報酬も高額で、コストが見合わず断念した。</p>
+                </div>
+                <div class="tech-card target-card">
+                    <div class="target-icon-wrapper">
+                        <div class="sprite-icon target-icon icon-unknown"></div>
+                    </div>
+                    <h3>投稿者が特定できず<br>困っている方</h3>
+                    <p>捨て垢や匿名での書き込みで、相手が誰かわからない。法的手段も取れず悩んでいる。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="section-padding">
+        <div class="container">
+             <div class="section-title-wrapper">
+                <span class="section-en-title">SOLUTION COMPARISON</span>
+                <h2 class="section-title">弁護士でも、自力でもない。<br>「テクニカルアプローチ」という選択肢。</h2>
+            </div>
+            <p class="solution-intro" style="color:var(--text-light);">諦める必要はありません。法的な手続きを使わず、Googleの高度なアルゴリズムとガイドラインを解析し、専門的なアプローチで解決を目指します。</p>
+            
+            <div class="comparison-cards">
+                <div class="comp-card">
+                    <h3>SELF REPORT<br><span style="font-size:0.8em; opacity:0.7;">自力で報告</span></h3>
+                    <p style="font-size:2rem; font-weight:900; color:var(--text-light); font-family: var(--font-mono);">FREE</p>
+                    <ul>
+                        <li>SUCCESS RATE<br><strong>× LOW (門前払い多)</strong></li>
+                        <li>EFFORT<br><strong>× HIGH (手間がかかる)</strong></li>
+                    </ul>
+                </div>
+                <div class="comp-card">
+                    <h3>LEGAL ACTION<br><span style="font-size:0.8em; opacity:0.7;">弁護士 (法的手段)</span></h3>
+                    <p style="font-size:2rem; font-weight:900; color:var(--text-light); font-family: var(--font-mono);">HIGH COST</p>
+                    <ul>
+                        <li>SUCCESS RATE<br><strong>△ VARIABLE (確実ではない)</strong></li>
+                        <li>TIME<br><strong>× LONG (半年以上かかる事も)</strong></li>
+                    </ul>
+                </div>
+                <div class="comp-card our-service">
+                    <div class="recommend-badge">RECOMMENDED</div>
+                    <h3>TECHNICAL SOLUTION<br><span style="font-size:0.8em; color:var(--accent-color);">当社 (専門対策)</span></h3>
+                    <p style="font-size:2.2rem; font-weight:900; color:var(--accent-color); line-height: 1.1; font-family: var(--font-mono);">PERFORMANCE-BASED<br><span style="font-size:1rem; display:block; color:var(--text-color);">完全成果報酬 (初期費用0円)</span></p>
+                    <ul>
+                        <li>SUCCESS RATE<br><strong style="color:var(--accent-color);">◎ HIGH (高い実績と解析力)</strong></li>
+                        <li>SPEED<br><strong style="color:var(--accent-color);">◎ FAST (最短即日着手)</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="logic-box">
+                <h3 style="font-size:1.4rem; color:var(--accent-color); font-family: var(--font-mono);">SYSTEM: なぜ法的手続きなしで可能なのか？</h3>
+                <p style="margin-bottom: 0; font-weight: 400; color:var(--text-color);">Googleの審査システムには、一般公開されていない複雑な判定アルゴリズムが存在します。私たちは膨大な事例データを解析し、その傾向を特定。法的な「開示請求」ではなく、**ガイドラインの隙間を突くのではなく、正当に準拠した専門的な報告ロジック**を構築し、再審査を促します。違法な手法は一切使用しません。だからこそ、安全かつ迅速なリセットが可能なのです。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefit" class="section-padding">
+        <div class="container">
+             <div class="section-title-wrapper">
+                <span class="section-en-title">CORE ADVANTAGES</span>
+                <h2 class="section-title">私たちが選ばれる4つの技術的理由</h2>
+            </div>
+            <div class="benefit-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon-wrapper">
+                        <div class="benefit-icon icon-1"></div>
+                    </div>
+                    <h3>ZERO RISK<br>完全成果報酬</h3>
+                    <p style="color:var(--text-light);">万が一、リセットできなかった場合、費用は一切いただきません。着手金も無料です。</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon-wrapper">
+                        <div class="benefit-icon icon-4"></div>
+                    </div>
+                    <h3>ANALYTICAL EXPERTISE<br>否決案件専門ノウハウ</h3>
+                    <p style="color:var(--text-light);">他社で断られた高難易度案件こそ、私たちの解析力が活きます。豊富なデータベースがあります。</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon-wrapper">
+                        <div class="benefit-icon icon-3"></div>
+                    </div>
+                    <h3>SPEED RESPONSE<br>弁護士不要の即応性</h3>
+                    <p style="color:var(--text-light);">煩雑な法的書類は不要。ご依頼から最短即日で解析と対策を開始します。</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon-wrapper">
+                        <div class="benefit-icon icon-2"></div>
+                    </div>
+                    <h3>SECURE & COMPLIANT<br>完全秘密厳守・正攻法</h3>
+                    <p style="color:var(--text-light);">投稿者や周囲に知られることなく、プラットフォームの規約に準拠した手法で解決します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="case" class="section-padding">
+        <div class="container">
+             <div class="section-title-wrapper">
+                <span class="section-en-title">CASE STUDIES</span>
+                <h2 class="section-title">導入クライアントの声と実績データ</h2>
+            </div>
+            <div class="case-layout">
+                <div class="case-graph text-center">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1em; color:var(--accent-color); font-family: var(--font-mono);">RATING RECOVERY DATA<br><span style="font-size:2.5rem;">★2.5 → ★4.2</span></h3>
+                    <img src="image_16.png" alt="評価回復グラフ">
+                    <p style="color:var(--text-light); font-size:0.9rem; margin-top:1em;">*当社クライアント平均データに基づく</p>
+                </div>
+                <div class="case-testimonials">
+                    <div class="case-box">
+                        <h3>CASE A: 飲食店経営者様</h3>
+                        <p>「Googleの自動返信に絶望していましたが、依頼から1ヶ月で事実無根の低評価が削除され、検索流入が回復しました。プロの解析力に感謝です。」</p>
+                    </div>
+                    <div class="case-box">
+                        <h3>CASE B: クリニック院長様</h3>
+                        <p>「弁護士費用が高すぎて諦めていたところ、成果報酬制の技術的なアプローチを知り依頼。スタッフの士気も上がり、本当に助かりました。」</p>
+                    </div>
+                    <div style="margin-top: 3em; text-align: center;">
+                        <a href="#contact-form" class="cta-button secondary">他の実績データを見る（無料診断へ）</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-en-title">FAQ</span>
+                <h2 class="section-title">よくある質問事項</h2>
+            </div>
+            <div class="faq-list">
+                <div class="tech-card faq-item">
+                    <div class="faq-icon-wrapper">
+                        <div class="sprite-icon faq-icon icon-q-mark"></div>
+                    </div>
+                    <div class="faq-content">
+                        <h3>本当に消せますか？成功率はどのくらいですか？</h3>
+                        <div class="faq-answer">
+                            <p>Googleのアルゴリズムは常に変動するため、100%の保証はできませんが、当社の専門的な解析アプローチにより、他社で断られた案件も含め多数の解決実績がございます。まずは無料診断にて可能性を判定いたします。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card faq-item">
+                    <div class="faq-icon-wrapper">
+                        <div class="sprite-icon faq-icon icon-q-mark"></div>
+                    </div>
+                    <div class="faq-content">
+                        <h3>なぜ弁護士より安いのですか？</h3>
+                        <div class="faq-answer">
+                            <p>私たちは法的手続き（裁判や開示請求など）を行わず、Googleのシステムに対する技術的なアプローチで解決を図るため、高額な弁護士費用や着手金が発生しません。完全成果報酬制を採用しております。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card faq-item">
+                    <div class="faq-icon-wrapper">
+                        <div class="sprite-icon faq-icon icon-q-mark"></div>
+                    </div>
+                    <div class="faq-content">
+                        <h3>違法な手法ではないですか？アカウント凍結のリスクは？</h3>
+                        <div class="faq-answer">
+                            <p>いいえ、決して違法な手法やスパム行為は行いません。Googleのガイドラインに準拠した正当な報告ロジックを構築して申請を行うため、アカウント凍結などのリスクは極めて低いです。ご安心ください。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card faq-item">
+                    <div class="faq-icon-wrapper">
+                        <div class="sprite-icon faq-icon icon-q-mark"></div>
+                    </div>
+                    <div class="faq-content">
+                        <h3>地方ですが対応できますか？</h3>
+                        <div class="faq-answer">
+                            <p>はい、全国対応可能です。全ての手続きはオンラインで完結しますので、ご来社の必要はありません。メール、お電話、LINE等でスムーズに進行いたします。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-final" class="section-padding">
+        <div class="container">
+            <h2>あなたの店舗のデジタル資産を、<br>これ以上毀損させないために。</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 3em; font-weight: 700; opacity: 0.8; color:var(--text-light);">悪い口コミは放置するほど、検索アルゴリズム上での評価が固定化します。<br>一日も早い技術的対策が、被害を最小限に食い止める鍵です。</p>
+            
+            <a href="#contact-form" class="cta-button">今すぐ無料で解析診断する</a>
+            <p style="margin-top: 1.5em; font-weight: 700; opacity: 0.8; font-family: var(--font-mono); color:var(--accent-color);">まずは可能性を知るだけでも構いません。最短即日回答。</p>
+
+            <div id="contact-form" class="tech-card" style="margin-top: 5em; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto; box-shadow: 0 0 50px rgba(0, 255, 255, 0.1);">
+                <h3 class="text-center" style="margin-bottom: 1.5em; font-size: 1.8rem;">FREE DIAGNOSIS FORM<br><span style="font-size:1rem; opacity:0.7;">無料解析診断フォーム</span></h3>
+                <p class="text-center" style="margin-bottom: 3em; font-weight: 400; color:var(--text-light);">下記フォームより対象URLをお知らせください。<br>専門エンジニアがリセットの可能性を解析し、診断結果をご連絡します。</p>
+                
+                <div style="display: grid; gap: 25px;">
+                    <input type="text" placeholder="会社名 / 店舗名" style="padding: 1.2em; border: 1px solid rgba(0,255,255,0.3); background:rgba(0,0,0,0.2); border-radius: var(--border-radius); width: 100%; box-sizing: border-box; font-weight: 700; font-family: inherit; color:#fff;">
+                    <input type="text" placeholder="ご担当者名" style="padding: 1.2em; border: 1px solid rgba(0,255,255,0.3); background:rgba(0,0,0,0.2); border-radius: var(--border-radius); width: 100%; box-sizing: border-box; font-weight: 700; font-family: inherit; color:#fff;">
+                    <input type="email" placeholder="メールアドレス (必須)" style="padding: 1.2em; border: 1px solid rgba(0,255,255,0.3); background:rgba(0,0,0,0.2); border-radius: var(--border-radius); width: 100%; box-sizing: border-box; font-weight: 700; font-family: inherit; color:#fff;">
+                    <input type="url" placeholder="対象のGoogleマップURL (必須)" style="padding: 1.2em; border: 2px solid var(--accent-color); background:rgba(0, 255, 255, 0.05); border-radius: var(--border-radius); width: 100%; box-sizing: border-box; font-weight: 700; font-family: inherit; color:var(--accent-color);">
+                    <textarea placeholder="ご相談詳細（任意）" rows="4" style="padding: 1.2em; border: 1px solid rgba(0,255,255,0.3); background:rgba(0,0,0,0.2); border-radius: var(--border-radius); width: 100%; box-sizing: border-box; font-family: inherit; font-weight: 700; font-family: inherit; color:#fff;"></textarea>
+                </div>
+                
+                <div class="text-center" style="margin-top: 3em;">
+                    <button class="cta-button" style="width: 100%; max-width: 400px; font-size: 1.5rem;">解析診断を依頼する (無料)</button>
+                    <p style="margin-top: 1.5em; font-weight: 700; font-family: var(--font-mono); color:var(--text-light);">※SSL暗号化通信。秘密厳守。強引な営業は一切いたしません。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="fixed-bottom-bar">
+        <div class="fixed-bottom-container">
+            <a href="#" class="floating-button btn-line">
+                <svg class="float-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.38 12.64c.03-.3.05-.6.05-.91 0-4.66-3.92-8.43-8.75-8.43s-8.75 3.77-8.75 8.43c0 4.18 3.14 7.67 7.55 8.32.41.08.76.24 1.04.48.19.16.29.41.37.67l.5 1.53c.13.42.27.85.52 1.2.18.26.45.44.77.5.27.05.55.02.81-.1.29-.14.55-.36.77-.63 2.1-2.56 3.47-5.43 3.85-8.56l.01-.03c.16-.48.29-.98.38-1.49zM11.69 15.67h-5.2v-1.68h3.53v-1.63H6.49v-1.68h3.53v-1.63H6.49V7.37h5.2v8.3zm5.2 0h-1.67V7.37h1.67v8.3zm-3.44-8.3h1.67v8.3h-1.67V7.37zm6.89 6.67h-3.53V7.37h3.53v1.68h-1.86v1.63h1.86v1.68h-1.86v1.63h1.86v1.68z"/></svg>
+                専門家へLINEで相談
+            </a>
+            <a href="#contact-form" class="floating-button btn-diagnosis">
+                <svg class="float-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                無料で解析診断
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
