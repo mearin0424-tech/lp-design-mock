@@ -25,7 +25,6 @@ body {
     line-height: 1.8;
     background-color: var(--bg-base);
     padding-bottom: 80px;
-    /* 背景にドットパターン */
     background-image: radial-gradient(var(--secondary-color) 1px, transparent 1px);
     background-size: 20px 20px;
     background-color: #fafdff;
@@ -58,7 +57,6 @@ p { margin: 0 0 1.5rem 0; font-weight: 400; }
 .section-title {
     font-size: 2.5rem; position: relative; display: inline-block;
 }
-/* ポップな下線（マーカー風） */
 .section-title::after {
     content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 12px;
     background-color: var(--accent-color); opacity: 0.6; z-index: -1;
@@ -97,17 +95,13 @@ p { margin: 0 0 1.5rem 0; font-weight: 400; }
 }
 .sprite-icon {
     width: 70px; height: 70px; 
-    /* 【変更点】ポップ用の画像を指定 */
     background-image: url('image_icon_pop.png');
-    background-size: 400% 400%; /* 4x4のスプライトと仮定 */
+    background-size: 400% 400%;
     display: inline-block;
 }
-/* ターゲットアイコン */
 .icon-mail-ng { background-position: 0% 50%; } .icon-money-ng { background-position: 50% 50%; } .icon-unknown { background-position: 100% 50%; }
-/* メリットアイコン */
 .icon-benefit-1 { background-position: 0% 0%; } .icon-benefit-2 { background-position: 33.33% 0%; }
 .icon-benefit-3 { background-position: 66.66% 0%; } .icon-benefit-4 { background-position: 100% 0%; }
-/* FAQアイコン */
 .icon-q-mark { background-position: 100% 100%; }
 
 /* --- FV (ファーストビュー) --- */
@@ -115,10 +109,8 @@ p { margin: 0 0 1.5rem 0; font-weight: 400; }
     background-image: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: #fff; padding: 160px 0 140px; position: relative; overflow: hidden;
 }
-/* 背景にポップな模様 */
 #fv::before {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    /* 【変更点】ポップ用の背景画像を指定 */
     background-image: url('image_main_pop.png'); background-size: cover; opacity: 0.2; mix-blend-mode: overlay;
 }
 .fv-content { position: relative; z-index: 2; }
@@ -139,27 +131,20 @@ h1.fv-title {
 .offer-sub { font-size: 1.8rem; font-weight: 900; color: var(--primary-color); }
 .offer-note { font-size: 0.9rem; color: var(--text-light); font-weight: 700; }
 .micro-copy { font-size: 1rem; font-weight: 700; margin-top: 1em; }
-
-/* 波形区切り線（SVGを背景として設定） */
 .wave-separator {
     position: absolute; bottom: -1px; left: 0; width: 100%; height: 120px;
-    /* 別途 wave.svg ファイルが必要です */
-    background-image: url('wave.svg');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    background-image: url('wave.svg'); background-size: 100% 100%; background-repeat: no-repeat;
 }
-
 
 /* --- 問題提起セクション --- */
 .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-/* 【変更点】背景画像として人物画像を設定 */
 .problem-image-bg {
-    width: 100%; padding-top: 75%; /* アスペクト比 4:3 を維持 */
-    border-radius: var(--border-radius);
+    width: 100%; padding-top: 75%; border-radius: var(--border-radius);
     border: 5px solid #fff; box-shadow: var(--box-shadow);
-    background-image: url('image_person_pop.png');
-    background-size: cover; background-position: center;
+    background-image: url('image_person_pop.png'); background-size: cover; background-position: center;
 }
+/* 【修正】箇条書きの「・」を削除し、チェックアイコンのみにする */
+.problem-list { list-style: none; padding: 0; }
 .problem-list li {
     position: relative; padding-left: 2.5em; margin-bottom: 1.2em; font-size: 1.2rem; font-weight: 700;
 }
@@ -171,33 +156,58 @@ h1.fv-title {
 .problem-alert { font-size: 1.3rem; color: var(--primary-color); border-bottom: 3px solid var(--accent-color); display: inline-block; }
 
 /* --- こんな人に選ばれていますセクション --- */
-.target-card { text-align: center; }
-.target-card h3 { font-size: 1.3rem; margin-bottom: 1em; color: var(--primary-color); }
+.target-card { text-align: center; padding-bottom: 30px;}
+/* 【追加】ターゲット層の人物画像スタイル (ポップ用) */
+.target-person-img {
+    width: 120px; height: 120px; margin: -60px auto 1.5em; /* カードからはみ出すように配置 */
+    border-radius: 50%; border: 5px solid #fff;
+    box-shadow: var(--box-shadow); background-size: cover; background-position: center;
+}
+.person-a { background-image: url('target_a_pop.png'); }
+.person-b { background-image: url('target_b_pop.png'); }
+.person-c { background-image: url('target_c_pop.png'); }
+/* アイコンを削除したため、margin調整 */
+.target-card h3 { font-size: 1.3rem; margin-bottom: 1em; color: var(--primary-color); margin-top: 1em;}
 
-/* --- 解決策比較セクション --- */
+/* --- 【修正】解決策比較セクション（表形式） --- */
 .solution-intro { text-align: center; max-width: 800px; margin: 0 auto 4rem; font-size: 1.2rem; font-weight: 700; }
-.comparison-cards { align-items: stretch; }
-.comp-card {
-    text-align: center; border: 4px solid #eee; position: relative; overflow: hidden;
+/* スマホでの横スクロール対応コンテナ */
+.comparison-table-wrapper {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    margin-bottom: 3rem; padding-bottom: 1rem;
 }
-.comp-card h3 { font-size: 1.5rem; margin-bottom: 1em; }
-.comp-card .price { font-size: 2rem; font-weight: 900; color: #ccc; line-height: 1; margin-bottom: 1.5em;}
-.comp-card .price-sub { font-size: 1rem; display: block; margin-top: 5px; }
-.comp-card ul { list-style: none; padding: 0; text-align: left; display: inline-block; }
-.comp-card li { margin-bottom: 1em; font-weight: 700; }
-.comp-card li strong { display: block; color: var(--primary-color); font-size: 1.2rem; }
-
-/* 推奨カード */
-.comp-card.our-service {
-    border-color: var(--secondary-color); transform: scale(1.05); z-index: 2;
-    box-shadow: 0 15px 30px rgba(0, 176, 255, 0.2); background: #fff;
+/* テーブル本体のスタイル (ポップ) */
+.comparison-table {
+    width: 100%; min-width: 600px; /* スマホでも最低限の幅を確保 */
+    border-collapse: separate; border-spacing: 0;
+    border: 4px solid var(--secondary-color); border-radius: var(--border-radius);
+    overflow: hidden; background: #fff;
 }
-.comp-card.our-service .price.highlight { color: var(--secondary-color); }
-.comp-card.our-service li strong.highlight { color: var(--secondary-color); }
-.recommend-badge {
-    background: var(--secondary-color); color: #fff; padding: 8px 20px; border-radius: 50px;
-    font-weight: 900; font-size: 1rem; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
-    box-shadow: 0 4px 0 #0288D1; z-index: 3;
+.comparison-table th, .comparison-table td {
+    padding: 1.2em 1em; text-align: center; vertical-align: middle;
+    border-bottom: 2px solid #f0f8ff;
+}
+.comparison-table thead th {
+    background: var(--bg-alt); color: var(--primary-color); font-weight: 900; font-size: 1.1rem;
+    border-bottom: 4px solid var(--secondary-color);
+}
+.comparison-table th.th-empty { background: transparent; border: none; }
+.comparison-table th.th-our-service {
+    background: var(--accent-color); color: var(--primary-color); font-size: 1.3rem; position: relative;
+}
+.comparison-table tbody th {
+    background: var(--bg-alt); font-weight: 900; color: var(--primary-color); text-align: left; padding-left: 1.5em;
+}
+.comparison-table td { font-weight: 700; font-size: 1.1rem; }
+.price-cell { font-size: 1.5rem; font-weight: 900; color: var(--primary-color); }
+.price-sub { font-size: 0.9rem; display: block; font-weight: 700; color: var(--text-light); }
+.highlight-cell {
+    background: #fff9e6; /* 薄い黄色 */ color: var(--primary-color); font-weight: 900;
+}
+.recommend-badge-table {
+    display: inline-block; background: #fff; color: var(--primary-color);
+    font-size: 0.8rem; padding: 3px 10px; border-radius: 20px;
+    vertical-align: middle; margin-left: 5px; border: 2px solid var(--primary-color);
 }
 .logic-box {
     margin-top: 4rem; padding: 50px; border-radius: var(--border-radius);
@@ -212,24 +222,32 @@ h1.fv-title {
 .benefit-card h3 { font-size: 1.3rem; }
 
 /* --- 事例セクション --- */
-.case-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.case-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
 .case-graph {
     background: var(--primary-color); padding: 30px; color: #fff;
     box-shadow: var(--box-shadow); border: 5px solid var(--secondary-color);
 }
 .case-graph h3 { color: #fff; }
 .case-graph .highlight { color: var(--accent-color); font-size: 2.5rem; }
-/* 【変更点】背景画像としてグラフ画像を設定 */
 .case-graph-bg {
-    width: 100%; padding-top: 60%; /* アスペクト比調整 */
-    border-radius: 10px; background-color: #fff; border: 3px solid #fff;
-    background-image: url('image_graph_pop.png');
-    background-size: cover; background-position: center;
+    width: 100%; padding-top: 60%; border-radius: 10px; background-color: #fff; border: 3px solid #fff;
+    background-image: url('image_graph_pop.png'); background-size: cover; background-position: center;
 }
 .graph-note { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 1em; }
-.case-box { margin-bottom: 25px; border-left: 10px solid var(--accent-color); }
-.case-box h3 { font-size: 1.3rem; margin-bottom: 0.5em; }
-.case-box p { font-size: 1.1rem; font-weight: 700; }
+/* 【追加】実績者の顔写真スタイル (ポップ用) */
+.case-box {
+    margin-bottom: 25px; border-left: 10px solid var(--accent-color);
+    display: flex; align-items: center; gap: 20px; text-align: left; padding: 25px;
+}
+.case-person-img {
+    width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
+    border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-size: cover; background-position: center;
+}
+.case-a { background-image: url('case_a_pop.png'); }
+.case-b { background-image: url('case_b_pop.png'); }
+.case-content h3 { font-size: 1.3rem; margin-bottom: 0.5em; margin-top: 0;}
+.case-content p { font-size: 1.1rem; font-weight: 700; margin-bottom: 0;}
 
 /* --- よくある質問事項セクション --- */
 .faq-list { max-width: 800px; margin: 0 auto; display: grid; gap: 20px; }
@@ -249,7 +267,6 @@ h1.fv-title {
 /* --- 最後のCTAセクション --- */
 #cta-final {
     background-color: var(--primary-color); color: #fff; text-align: center;
-    /* ポップな波線背景 */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2300B0FF' fill-opacity='0.2' d='M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: center bottom; background-size: cover;
 }
@@ -294,23 +311,16 @@ h1.fv-title {
     .fv-offer { font-size: 1.2rem; padding: 1em 1.5em; } .offer-sub { font-size: 1.5rem; }
     .problem-grid, .case-layout { grid-template-columns: 1fr; gap: 40px; }
     .problem-image { order: -1; }
-    
-    .comparison-cards {
-        display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
-        gap: 15px; padding: 30px 15px; margin: 0 -15px; scroll-snap-type: x mandatory; scrollbar-width: none;
-    }
-    .comparison-cards::-webkit-scrollbar { display: none; }
-    .comp-card {
-        flex: 0 0 auto; min-width: 280px; max-width: 85%;
-        scroll-snap-align: center; padding: 30px 20px;
-    }
-    .comp-card.our-service { transform: scale(1); border-width: 4px; }
-    
     .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; gap: 20px; }
     #cta-final h2 { font-size: 2.5rem; }
     .floating-button { font-size: 0.9rem; padding: 10px 15px; }
     .float-icon { width: 20px; height: 20px; margin-right: 8px; }
     .faq-item { grid-template-columns: 1fr; gap: 10px; }
+    /* スマホでの口コミレイアウト調整 */
+    .case-box { flex-direction: column; text-align: center; }
+    .case-person-img { margin: 0 auto; }
+    .target-card { padding-bottom: 20px; }
+    .target-person-img { width: 100px; height: 100px; margin-top: -50px; }
 }
 @media (max-width: 480px) {
         .grid-3, .grid-4 { grid-template-columns: 1fr; }
