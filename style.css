@@ -2,19 +2,19 @@
 
 /* --- カラー＆フォント定義 (誠実・信頼) --- */
 :root {
-    --primary-color: #1a365d; /* 信頼感のある深いネイビー */
-    --accent-color: #f59e0b; /* 親しみやすい温かなオレンジイエロー */
+    --primary-color: #1a365d;
+    --accent-color: #f59e0b;
     --accent-hover: #d97706;
-    --secondary-color: #3b82f6; /* 信頼のブルー */
+    --secondary-color: #3b82f6;
     --text-color: #333333;
     --text-light: #666666;
     --bg-base: #ffffff;
-    --bg-alt: #f3f4f6; /* 明るいグレー背景 */
-    --line-color: #06C755; /* LINEグリーン */
+    --bg-alt: #f3f4f6;
+    --line-color: #06C755;
     
     --font-base: 'Noto Sans JP', sans-serif;
-    --border-radius: 12px; /* 適度な丸み */
-    --box-shadow: 0 5px 20px rgba(0,0,0,0.05); /* 柔らかい影 */
+    --border-radius: 12px;
+    --box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
 /* --- 基本スタイル --- */
@@ -24,7 +24,7 @@ body {
     margin: 0;
     line-height: 1.8;
     background-color: var(--bg-base);
-    padding-bottom: 90px;
+    padding-bottom: 120px; /* バルーンの分、少し余白を増やす */
 }
 h1, h2, h3, h4 {
     font-family: var(--font-base);
@@ -92,13 +92,11 @@ p { margin: 0 0 1.5rem 0; font-weight: 400; }
 }
 .sprite-icon {
     width: 60px; height: 60px; 
-    /* 【修正】画像パスを統一版に変更 */
     background-image: url('image_icon_unified.png');
-    background-size: 400% 400%; /* ※スプライト画像のレイアウトに合わせて調整が必要です */
+    background-size: 400% 400%;
     display: inline-block;
     filter: grayscale(0.2) brightness(1.1);
 }
-/* ※以下の背景位置は、実際のunified画像のレイアウトに合わせて調整してください */
 .icon-benefit-1 { background-position: 0% 0%; }
 .icon-benefit-2 { background-position: 33.33% 0%; }
 .icon-benefit-3 { background-position: 66.66% 0%; }
@@ -106,7 +104,6 @@ p { margin: 0 0 1.5rem 0; font-weight: 400; }
 
 /* --- FV (ファーストビュー) --- */
 #fv {
-    /* 【修正】画像パスを統一版に変更 */
     background-image: url('image_main_unified.png');
     background-size: cover; background-position: center center;
     color: var(--primary-color); padding: 140px 0 120px; position: relative;
@@ -164,9 +161,8 @@ h1.fv-title-lg {
 .fv-cta-btn { white-space: nowrap; padding: 1em 2em; font-size: 1.2rem;}
 .micro-copy { font-size: 0.85rem; color: var(--text-light); margin-top: 0.5em; }
 
-/* 【修正】ウェーブ画像をPNGに変更し、サイズ調整 */
 .wave-separator {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: auto; padding-top: 10%; /* アスペクト比維持のため */
+    position: absolute; bottom: 0; left: 0; width: 100%; height: auto; padding-top: 10%;
     background-image: url('wave_unified.png');
     background-size: 100% auto; background-repeat: no-repeat; background-position: bottom center;
     z-index: 1;
@@ -178,7 +174,6 @@ h1.fv-title-lg {
     width: 100%; padding-top: 75%; border-radius: var(--border-radius);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     border: 5px solid #fff;
-    /* 【修正】画像パスを統一版に変更 */
     background-image: url('image_person_unified.png'); background-size: cover; background-position: center;
 }
 .problem-list { list-style: none; padding: 0; }
@@ -197,7 +192,6 @@ h1.fv-title-lg {
     border-radius: 50%; background-color: #fff; border: 2px solid var(--bg-alt);
     box-shadow: 0 4px 10px rgba(0,0,0,0.05); background-size: cover; background-position: center;
 }
-/* 【修正】画像パスを統一版に変更 */
 .person-a { background-image: url('target_a_unified.png'); }
 .person-b { background-image: url('target_b_unified.png'); }
 .person-c { background-image: url('target_c_unified.png'); }
@@ -258,10 +252,17 @@ h1.fv-title-lg {
 .case-graph { padding: 30px; }
 .graph-title { font-size: 1.5rem; }
 .graph-title .highlight { color: var(--accent-color); font-size: 2rem; }
+
+/* 【修正】V字回復グラフを横長に対応 */
 .case-graph-bg {
-    width: 100%; padding-top: 60%; border-radius: 4px;
-    /* 【修正】画像パスを統一版に変更 */
-    background-image: url('image_graph_unified.png'); background-size: cover; background-position: center;
+    width: 100%;
+    padding-top: 40%; /* 高さを抑えて横長にする (例: 60% -> 40%) */
+    background-image: url('image_graph_unified.png');
+    background-size: contain; /* 画像全体を表示 */
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 4px;
+    background-color: #f9f9f9; /* 画像の余白部分の背景色 */
 }
 .graph-note { font-size: 0.9rem; color: var(--text-light); margin-top: 1em; }
 .case-box {
@@ -273,13 +274,12 @@ h1.fv-title-lg {
     background-color: var(--bg-alt); background-size: cover; background-position: center;
     border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-/* 【修正】画像パスを統一版に変更 */
 .case-a { background-image: url('case_a_unified.png'); }
 .case-b { background-image: url('case_b_unified.png'); }
 .case-box h3 { font-size: 1.2rem; margin-bottom: 0.5em; margin-top: 0;}
 .case-box p { font-size: 1rem; margin-bottom: 0;}
 
-/* --- よくある質問事項セクション（アコーディオン） --- */
+/* --- よくある質問事項セクション --- */
 .faq-list { display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto; }
 .faq-item {
     padding: 0; margin-bottom: 0; overflow: hidden; cursor: pointer;
@@ -287,14 +287,13 @@ h1.fv-title-lg {
 .faq-header {
     display: flex; align-items: center; gap: 15px; padding: 25px;
     transition: background-color 0.3s;
-    text-align: left; /* 左寄せ */
+    text-align: left;
 }
 .faq-item:hover .faq-header { background-color: #f8fbff; }
 .faq-question {
     font-size: 1.1rem; margin: 0; display: flex; align-items: center;
     flex: 1; position: relative;
 }
-/* 【修正】Qマークのスタイル */
 .q-mark {
     color: var(--accent-color); margin-right: 0.5em; font-weight: 700; font-size: 1.4rem; line-height: 1;
 }
@@ -312,10 +311,9 @@ h1.fv-title-lg {
     max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
     border-top: 1px solid transparent;
 }
-/* 【修正】回答エリアの余白調整 */
 .answer-content {
-    padding: 10px 25px 30px 50px; /* 左の余白を調整 */
-    border-left: none; /* 左の線を削除 */
+    padding: 10px 25px 30px 50px;
+    border-left: none;
 }
 .faq-answer p { font-size: 1rem; margin: 0; }
 .faq-item.is-open .faq-answer { max-height: 500px; border-top-color: #eee; }
@@ -363,7 +361,7 @@ h1.fv-title-lg {
 .line-cta:hover { background: #05a848; transform: translateY(-3px); }
 .line-icon { width: 32px; height: 32px; margin-right: 10px; }
 
-/* --- 下部フローティング帯ボタン --- */
+/* --- 下部フローティング帯ボタン（構造変更） --- */
 .fixed-bottom-bar {
     position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999;
     background: rgba(255, 255, 255, 0.95); padding: 15px 0;
@@ -373,8 +371,42 @@ h1.fv-title-lg {
 .fixed-bottom-container {
     display: flex; justify-content: center; gap: 15px; max-width: 900px; margin: 0 auto; padding: 0 15px;
 }
+
+/* 【新規】ボタンコンテナとバルーン */
+.btn-container-float {
+    position: relative;
+    flex: 1;
+    display: flex; /* ボタンをフル幅にするため */
+}
+.btn-balloon {
+    position: absolute;
+    bottom: 115%; /* ボタンの上に配置 */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color); /* オレンジ */
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+/* バルーンの三角矢印 */
+.btn-balloon::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--accent-color);
+}
+
 .floating-button {
-    flex: 1; display: flex; align-items: center; justify-content: center;
+    /* flex: 1; を削除し、コンテナ内で幅広に */
+    width: 100%;
+    display: flex; align-items: center; justify-content: center;
     padding: 12px; border-radius: 50px; text-decoration: none;
     font-weight: 700; font-size: 1rem; transition: all 0.3s ease; text-align: center; max-width: 400px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: var(--font-base);
@@ -388,6 +420,7 @@ h1.fv-title-lg {
 
 /* --- レスポンシブ対応 --- */
 @media (max-width: 768px) {
+    /* ... (既存のレスポンシブ設定) ... */
     .section-padding { padding: 80px 0; }
     #fv { padding: 120px 0 100px; }
     h1.fv-title-lg { font-size: 2.6rem; }
@@ -401,7 +434,7 @@ h1.fv-title-lg {
     .fv-url-input-group { flex-direction: column; }
     .fv-url-input { padding: 1em; }
     .fv-cta-btn { width: 100%; padding: 1em; font-size: 1.1rem; }
-    .wave-separator { padding-top: 15%; } /* スマホでのウェーブ高さ調整 */
+    .wave-separator { padding-top: 15%; }
 
     .problem-grid, .case-layout { grid-template-columns: 1fr; gap: 40px; }
     .problem-image { order: -1; }
@@ -411,12 +444,14 @@ h1.fv-title-lg {
     .modal-content { padding: 30px 20px; }
     .security-note { flex-direction: column; gap: 0; }
 
-    /* 【修正】FAQスマホ調整 */
     .faq-header { padding: 15px 20px; gap: 10px; }
     .answer-content { padding: 10px 20px 20px 45px; }
     .faq-question { font-size: 1rem; }
     .q-mark { font-size: 1.2rem; margin-right: 0.3em; }
     .accordion-toggle { width: 20px; height: 20px; }
+
+    /* 【修正】スマホでのバルーン調整 */
+    .btn-balloon { font-size: 0.7rem; padding: 4px 8px; bottom: 120%; }
 
     .fixed-bottom-bar { padding: 10px 0; }
     .floating-button { font-size: 0.85rem; padding: 10px; border-radius: 30px; }
